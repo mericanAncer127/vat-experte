@@ -29,7 +29,8 @@ const getVatDetails = async (vatId) => {
   
         // Append data to CSV file
         fs.appendFileSync(filePath, fileExists ? csvLine : headers + csvLine, 'utf8');
-        if (name === "Remy Allard") {
+        if (name.includes("Allard")) {
+          console.log('finally found Allard!');
           process.exit();
         }
         validNums += `, ${id}`;
@@ -71,8 +72,8 @@ const processVatIds = async (st, ed, requestsPerPromise) => {
   Promise.all(promises);
 };
 
-const start = 20000000,
-  end = 29999999,
+const start = 10000000,
+  end = 19999999,
   limit = 1000000;
 processVatIds(start, end, limit);
 
