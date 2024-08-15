@@ -48,7 +48,7 @@ const getVatDetails = async (vatId) => {
 const processRequests = async (st, ed) => {
 
   for (let i = st; i < ed; i+=20) {
-    let ids = `DK${st}`;
+    let ids = `DK${i}`;
     let end = i+20 > ed ? ed : i+20;
     for(let j = i+1; j < end; j++)
       ids += `,DK${j}`
