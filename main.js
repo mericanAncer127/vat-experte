@@ -38,7 +38,7 @@ const getVatDetails = async (vatId) => {
       }
     }
 
-    console.log(`${invalidNums} are invalid and ${validNums} are valid`);
+    // console.log(`${invalidNums} are invalid and ${validNums} are valid`);
 
   } catch (error) {
     console.error("Error fetching VAT details:", error);
@@ -46,13 +46,14 @@ const getVatDetails = async (vatId) => {
 };
 
 const processRequests = async (st, ed) => {
-
+  let interval = ed - st;
   for (let i = st; i < ed; i+=20) {
     let ids = `DK${i}`;
     let end = i+20 > ed ? ed : i+20;
     for(let j = i+1; j < end; j++)
       ids += `,DK${j}`
     await getVatDetails(ids);
+    console.log(`${(i-st)/interval*100} % done`);
   }
 };
 
