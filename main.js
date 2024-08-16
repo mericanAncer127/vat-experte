@@ -54,7 +54,8 @@ const processRequests = async (st, ed) => {
     for(let j = i+1; j < end; j++)
       ids += `,DK${j}`
     await getVatDetails(ids);
-    console.log(`${(i-st)/interval*100} % done`);
+    if(i % 100 == 0)
+      console.log(`${(i-st)/interval*100} % done, ~DK${i}`);
   }
 };
 
@@ -66,7 +67,10 @@ const processVatIds = async (st, ed, requestsPerPromise) => {
     // console.log(st + i * requestsPerPromise, st + (i + 1) * requestsPerPromise)
     let end = st + (i + 1) * requestsPerPromise;
     if(end > ed) end = ed;
-    promises.push(processRequests(st + i * requestsPerPromise, end));
+    let str = st + i * requestsPerPromise;
+    str += 900000;
+    end = str + 100000;
+    promises.push(processRequests(str, end));
   }
 
   Promise.all(promises);

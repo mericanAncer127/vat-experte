@@ -1,2 +1,1 @@
-node main.js
-pause
+node main.js -> log.txt
